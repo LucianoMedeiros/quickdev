@@ -1,0 +1,45 @@
+.template {
+  min-height: 100vh;
+}
+.sideImage {
+  background-image: url('https://picsum.photos/1920');
+  background-size: cover;
+  background-position: left bottom;
+  min-height: 100vh;
+}
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+.loginBox {
+  width: 100%;
+  background-color: white;
+  padding: 40px;
+}
+.title {
+  font-size: 40px;
+  text-align: center;
+}
+
+.title::after {
+  content: '';
+  display: block;
+  height: 2px;
+  background-image: linear-gradient(90deg, rgba(128, 128, 128, 0.05) 0%, rgba(128, 128, 128, 0.7) 51%, rgba(128, 128, 128, 0.05) 100%);
+}
+.formFooter {
+  /* background-color: #ddd; */
+  margin: 0px -40px -40px;
+  padding: 10px 40px 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.formFooter button {
+  padding: 0;
+}
+.fullWidth {
+  width: 100%;
+}

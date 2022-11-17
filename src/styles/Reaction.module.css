@@ -1,0 +1,27 @@
+.container {
+  background: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 30px 0;
+}
+.like {
+  color: blue;
+  border: 1px solid blue;
+  border-radius: 40px;
+  margin: 0 10px;
+}
+.like:hover {
+  background: blue;
+  color: white;
+}
+.dislike {
+  color: tomato;
+  border: 1px solid tomato;
+  border-radius: 40px;
+}
+.dislike:hover {
+  background: tomato;
+  color: white;
+}
