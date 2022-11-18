@@ -1,6 +1,6 @@
 import { Button, Typography } from 'antd'
 import { useRouter } from 'next/router'
-import { RoutePath } from '~/constants/routes'
+import { RoutePath } from '~/constants/portal-routes'
 import TemplateOnline from '~/template/online'
 import styles from '../styles/Home.module.css'
 

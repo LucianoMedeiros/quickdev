@@ -8,3 +8,10 @@ export const notificationError = (title: string, message: string, placement: Not
     placement,
   })
 }
+export const notificationSuccess = (title: string, message: string, placement: NotificationPlacement) => {
+  notification.success({
+    message: title,
+    description: message,
+    placement,
+  })
+}

@@ -1,6 +1,6 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { NextRouter } from 'next/router'
-import { RoutePath } from '~/constants/routes'
+import { RoutePath } from '~/constants/portal-routes'
 import { fbApp } from '~/firebase/config'
 import { AppDispatch } from '../store-config'
 import { UserActions } from './user-reducer'

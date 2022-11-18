@@ -1,8 +1,8 @@
 # Users
 
-- [ ] [Autentication] - Login
+- [x] [Autentication] - Login
 - [ ] [Autentication] - Reset de Senha
-- [ ] [Autentication] - Criação de usuário
+- [x] [Autentication] - Criação de usuário
 - [ ] [Profile] - Editar usuário
 - [ ] [Profile] - Perfil de Leitor e Redator
 

@@ -3,7 +3,7 @@ import { Button, Table, Typography, Tooltip, Badge } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { RoutePath } from '~/constants/routes'
+import { RoutePath } from '~/constants/portal-routes'
 import TemplateOnline from '~/template/online'
 
 interface IPostList {

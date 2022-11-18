@@ -1,6 +1,6 @@
 import { Button } from 'antd'
 import { useRouter } from 'next/router'
-import { RoutePath } from '~/constants/routes'
+import { RoutePath } from '~/constants/portal-routes'
 import styles from '~/styles/Offline.module.css'
 
 type Props = {

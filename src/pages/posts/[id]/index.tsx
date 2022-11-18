@@ -1,7 +1,7 @@
 import { Button, Form, Input, Typography, Upload } from 'antd'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { RoutePath } from '~/constants/routes'
+import { RoutePath } from '~/constants/portal-routes'
 import TemplateOnline from '~/template/online'
 
 const { Title } = Typography

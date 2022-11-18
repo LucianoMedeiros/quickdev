@@ -5,7 +5,7 @@ import { ColumnsType, ColumnType } from 'antd/lib/table'
 import moment from 'moment'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { RoutePath } from '~/constants/routes'
+import { RoutePath } from '~/constants/portal-routes'
 import TemplateOnline from '~/template/online'
 
 const { Group } = Button

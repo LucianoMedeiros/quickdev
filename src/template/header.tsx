@@ -2,7 +2,7 @@ import { HomeOutlined, TableOutlined, UserOutlined } from '@ant-design/icons'
 import { Button, Dropdown, Layout, MenuProps } from 'antd'
 import { getAuth } from 'firebase/auth'
 import { useRouter } from 'next/router'
-import { RoutePath } from '~/constants/routes'
+import { RoutePath } from '~/constants/portal-routes'
 import { fbApp } from '~/firebase/config'
 import { RootState, useAppDispatch, useAppSelector } from '~/store/store-config'
 import { UserActions } from '~/store/user/user-reducer'
@@ -13,7 +13,7 @@ const { Header } = Layout
 const HeaderTemplate = () => {
   const dispatch = useAppDispatch()
   const router = useRouter()
-  const username = useAppSelector((state: RootState) => state.user.current.email)
+  const user = useAppSelector((state: RootState) => state.user.current)
 
   const logout = () => {
     const auth = getAuth(fbApp)
@@ -61,7 +61,7 @@ const HeaderTemplate = () => {
 
       <Dropdown menu={{ items }} placement="bottomRight" arrow>
         <Button icon={<UserOutlined />} className={styles.headerButtons} size="large" type="link">
-          {username}
+          {user.name || user.email}
         </Button>
       </Dropdown>
     </Header>
