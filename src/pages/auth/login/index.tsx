@@ -3,25 +3,46 @@ import { useRouter } from 'next/router'
 import FormFooter from '~/components/offline/form-footer'
 import OfflineTitle from '~/components/offline/title'
 import { RoutePath } from '~/constants/routes'
+import { IAuthUser } from '~/interfaces/user-interface'
+import { useAppDispatch } from '~/store/store-config'
+import { loginAction } from '~/store/user/login-action'
 import styles from '~/styles/Offline.module.css'
 import TemplateOffline from '~/template/offline'
 
-const { Item } = Form
+const { Item, useForm } = Form
+const { Password } = Input
 
 const LoginPage = () => {
   const router = useRouter()
+  const dispatch = useAppDispatch()
+  const [form] = useForm<IAuthUser>()
+
+  const handleSubmit = async () => {
+    const user = form.getFieldsValue()
+    const { payload } = await dispatch(loginAction(user))
+    if (payload) {
+      router.push(RoutePath.app.home)
+    }
+  }
 
   return (
     <TemplateOffline>
-      <Form layout="vertical" className={styles.loginBox}>
+      <Form form={form} layout="vertical" className={styles.loginBox} onFinish={handleSubmit}>
         <OfflineTitle>Login</OfflineTitle>
-        <Item label="Email">
+        <Item
+          label="Email"
+          name="email"
+          rules={[
+            { required: true, message: 'Campo obrigatório' },
+            { type: 'email', message: 'Email inválido' },
+          ]}
+        >
           <Input />
         </Item>
-        <Item label="Senha">
-          <Input />
+        <Item label="Senha" name="password" rules={[{ required: true, message: 'Campo obrigatório' }]}>
+          <Password />
         </Item>
-        <Button type="primary" size="large" className={styles.fullWidth} onClick={() => router.push(RoutePath.app.home)}>
+        <Button type="primary" size="large" className={styles.fullWidth} htmlType="submit">
           Entrar
         </Button>
         <FormFooter showForgot showSignup />

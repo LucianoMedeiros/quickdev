@@ -2,12 +2,14 @@ import { HomeOutlined, TableOutlined, UserOutlined } from '@ant-design/icons'
 import { Button, Dropdown, Layout, MenuProps } from 'antd'
 import { useRouter } from 'next/router'
 import { RoutePath } from '~/constants/routes'
+import { RootState, useAppSelector } from '~/store/store-config'
 import styles from '../styles/Online.module.css'
 
 const { Header } = Layout
 
 const HeaderTemplate = () => {
   const router = useRouter()
+  const username = useAppSelector((state: RootState) => state.user.current.email)
 
   const items: MenuProps['items'] = [
     {
@@ -48,7 +50,7 @@ const HeaderTemplate = () => {
 
       <Dropdown menu={{ items }} placement="bottomRight" arrow>
         <Button icon={<UserOutlined />} className={styles.headerButtons} size="large" type="link">
-          lucianomla@gmail.com
+          {username}
         </Button>
       </Dropdown>
     </Header>

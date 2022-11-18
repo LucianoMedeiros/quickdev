@@ -10,7 +10,7 @@ const { Content, Sider } = Layout
 const TemplateOffline = ({ children }: Props) => {
   return (
     <Layout className={styles.template}>
-      <Sider className={styles.sideImage} width={'70%'} />
+      <Sider className={styles.sideImage} width={'calc(100% - 500px)'} />
       <Content className={styles.content}>{children}</Content>
     </Layout>
   )
