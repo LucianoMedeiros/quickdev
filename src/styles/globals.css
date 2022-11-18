@@ -27,7 +27,9 @@ div.ant-typography {
 .ant-btn-group button {
   margin-left: 20px !important;
 }
-
+.ant-spin-nested-loading {
+  width: 100%;
+}
 :root {
   --xs: 480px;
   --sm: 576px;

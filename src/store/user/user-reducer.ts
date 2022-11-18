@@ -13,6 +13,9 @@ const slice = createSlice({
       const user = userConversorType(payload)
       state.current = user
     },
+    clearUser: state => {
+      state.current = initialState.current
+    },
   },
 })
 

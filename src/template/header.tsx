@@ -1,15 +1,26 @@
 import { HomeOutlined, TableOutlined, UserOutlined } from '@ant-design/icons'
 import { Button, Dropdown, Layout, MenuProps } from 'antd'
+import { getAuth } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import { RoutePath } from '~/constants/routes'
-import { RootState, useAppSelector } from '~/store/store-config'
+import { fbApp } from '~/firebase/config'
+import { RootState, useAppDispatch, useAppSelector } from '~/store/store-config'
+import { UserActions } from '~/store/user/user-reducer'
 import styles from '../styles/Online.module.css'
 
 const { Header } = Layout
 
 const HeaderTemplate = () => {
+  const dispatch = useAppDispatch()
   const router = useRouter()
   const username = useAppSelector((state: RootState) => state.user.current.email)
+
+  const logout = () => {
+    const auth = getAuth(fbApp)
+    auth.signOut()
+    dispatch(UserActions.clearUser())
+    router.push(RoutePath.auth.login)
+  }
 
   const items: MenuProps['items'] = [
     {
@@ -31,7 +42,7 @@ const HeaderTemplate = () => {
     {
       key: '4',
       label: (
-        <Button type="link" onClick={() => router.push(RoutePath.auth.logout)}>
+        <Button type="link" onClick={logout}>
           Sair
         </Button>
       ),
