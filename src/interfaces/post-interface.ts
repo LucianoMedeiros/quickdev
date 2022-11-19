@@ -3,7 +3,7 @@ export default interface IPost {
   user_id: string
   title: string
   description: string
-  featureImageURL: string
+  featureImageURL: any
   status: boolean
 }
 export interface IReactionPost {

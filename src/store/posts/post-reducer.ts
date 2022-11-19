@@ -8,6 +8,9 @@ const slice = createSlice({
     setIsPending: (state, { payload }) => {
       state.isPending = payload
     },
+    setAll: (state, { payload }) => {
+      state.list = payload
+    },
   },
 })
 
