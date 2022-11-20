@@ -20,6 +20,9 @@ const slice = createSlice({
     setReactions: (state, { payload }) => {
       state.currentReactions = payload
     },
+    setComments: (state, { payload }) => {
+      state.currentComments = payload
+    },
   },
 })
 

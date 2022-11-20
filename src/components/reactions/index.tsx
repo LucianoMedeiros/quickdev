@@ -4,8 +4,8 @@ import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { IReaction, ReactionsEnum } from '~/interfaces/reaction-interface'
-import { createPostReactionAction } from '~/store/posts/create-post-reaction-action'
-import { getPostReactionsAction } from '~/store/posts/get-post-reaction-action'
+import { createPostReactionAction } from '~/store/reactions/create-post-reaction-action'
+import { getPostReactionsAction } from '~/store/reactions/get-post-reaction-action'
 import { RootState, useAppDispatch, useAppSelector } from '~/store/store-config'
 import styles from '~/styles/Reaction.module.css'
 
@@ -35,7 +35,6 @@ const Ractions = () => {
   }
   useEffect(() => {
     if (id && user) {
-      console.log('www')
       dispatch(getPostReactionsAction({ post_id: id, user_id: user.id } as IReaction))
     }
   }, [id, user])

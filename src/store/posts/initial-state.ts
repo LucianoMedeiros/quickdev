@@ -23,4 +23,5 @@ export const initialState: IPostInitialState = {
     dislikes: 0,
     myReaction: 0,
   },
+  currentComments: [],
 }

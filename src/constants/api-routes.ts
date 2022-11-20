@@ -6,6 +6,10 @@ export const APIRoutePath = {
       create: `${serverURL}/api/post/version/:post_id`,
       get: `${serverURL}/api/post/version/:post_id`,
     },
+    comment: {
+      create: `${serverURL}/api/post/comment`,
+      getAll: `${serverURL}/api/post/comment/list/:post_id`,
+    },
     update: `${serverURL}/api/post/:id`,
     create: `${serverURL}/api/post`,
     getAll: `${serverURL}/api/post/by-user/:user_id`,

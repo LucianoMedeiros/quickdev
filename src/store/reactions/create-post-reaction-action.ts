@@ -4,7 +4,7 @@ import { APIRoutePath } from '~/constants/api-routes'
 import { IReaction } from '~/interfaces/reaction-interface'
 import { notificationError, notificationSuccess } from '~/utilities/notification'
 import { getPostReactionsAction } from './get-post-reaction-action'
-import { PostActions } from './post-reducer'
+import { PostActions } from '../posts/post-reducer'
 
 export const createPostReactionAction = createAsyncThunk('post/createReaction', async (reaction: IReaction, { dispatch }) => {
   dispatch(PostActions.setIsPending(true))

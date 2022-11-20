@@ -23,7 +23,7 @@ const postVersionSchema = new Schema(
     },
   },
   {
-    collection: 'post_versions',
+    collection: 'versions',
   }
 )
 

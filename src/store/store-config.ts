@@ -1,8 +1,6 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
-import { useSelector } from 'react-redux'
-import { TypedUseSelectorHook, useDispatch } from 'react-redux'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { articleReducer } from './article/article-reducer'
-import { commentReducer } from './comment/comment-reducer'
 import { dashboardReducer } from './dashboard/dashboard-reducer'
 import { postReducer } from './posts/post-reducer'
 import { userReducer } from './user/user-reducer'
@@ -11,7 +9,6 @@ const store = configureStore({
   reducer: {
     user: userReducer,
     posts: postReducer,
-    comments: commentReducer,
     dashboard: dashboardReducer,
     article: articleReducer,
   },

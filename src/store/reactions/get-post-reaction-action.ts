@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios'
 import { APIRoutePath } from '~/constants/api-routes'
 import { IReaction } from '~/interfaces/reaction-interface'
 import { notificationError } from '~/utilities/notification'
-import { PostActions } from './post-reducer'
+import { PostActions } from '../posts/post-reducer'
 
 export const getPostReactionsAction = createAsyncThunk('post/getReactions', async ({ post_id, user_id }: IReaction, { dispatch }) => {
   dispatch(PostActions.setIsPending(true))

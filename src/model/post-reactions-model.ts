@@ -28,7 +28,7 @@ const reactionSchema = new Schema(
     },
   },
   {
-    collection: 'post_reactions',
+    collection: 'reactions',
   }
 )
 

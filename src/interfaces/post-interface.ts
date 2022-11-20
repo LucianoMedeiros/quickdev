@@ -1,3 +1,4 @@
+import { IComment } from './comment-interface'
 import { IReactionPost } from './reaction-interface'
 
 export default interface IPost {
@@ -24,6 +25,7 @@ export interface IPostViews {
 export interface IPostInitialState {
   versionList: IPostVersion
   currentReactions: IReactionPost
+  currentComments: IComment[]
   current: IPost
   list: IPost[]
   isPending: boolean

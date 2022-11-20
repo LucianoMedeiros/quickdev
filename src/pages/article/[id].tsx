@@ -1,21 +1,26 @@
-import { Form, Input, Typography } from 'antd'
+import { Button, Form, Input, Typography } from 'antd'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Author from '~/components/author-article'
+import CommentForm from '~/components/comment-form'
 import CommentItem from '~/components/comment-item'
+import CommentList from '~/components/comment-list'
 import Ractions from '~/components/reactions'
+import { getAllComments } from '~/controllers/comment-controller'
+import { IComment } from '~/interfaces/comment-interface'
 import { getArticleAction } from '~/store/article/get-article-action'
+import { getAllCommentsAction } from '~/store/comment/get-all-comments-action'
 import { RootState, useAppDispatch, useAppSelector } from '~/store/store-config'
 import styles from '~/styles/Article.module.css'
 import TemplateOnline from '~/template/online'
 
 const { Title, Paragraph } = Typography
-const { useForm, Item } = Form
-const { TextArea } = Input
 
 const ArticlePage = () => {
   const dispatch = useAppDispatch()
   const article = useAppSelector((state: RootState) => state.article.current)
+  const comments = useAppSelector((state: RootState) => state.posts.currentComments)
+  const user = useAppSelector((state: RootState) => state.user.current)
 
   const route = useRouter()
   const { id } = route.query
@@ -26,13 +31,12 @@ const ArticlePage = () => {
     }
   }, [id])
 
-  const commentList = [
-    { autor: 'nome do autor 1', id: '1', comment: 'sss', isActive: false, createAt: '2022-11-17T18:51:19.347Z' },
-    { autor: 'nome do autor 2', id: '2', comment: 'fff', isActive: true, createAt: '2022-11-17T18:51:19.347Z' },
-    { autor: 'nome do autor 3', id: '3', comment: 'ddd', isActive: false, createAt: '2022-11-17T18:51:19.347Z' },
-    { autor: 'nome do autor 4', id: '4', comment: '333', isActive: true, createAt: '2022-11-17T18:51:19.347Z' },
-    { autor: 'nome do autor 5', id: '5', comment: 'dddd', isActive: true, createAt: '2022-11-17T18:51:19.347Z' },
-  ]
+  useEffect(() => {
+    if (id && user) {
+      dispatch(getAllCommentsAction({ post_id: id, user_id: user.id } as IComment))
+    }
+  }, [id, user])
+
   return (
     <TemplateOnline>
       <Title>{article.title}</Title>
@@ -40,12 +44,9 @@ const ArticlePage = () => {
       {article.featureImageURL && <img src={article.featureImageURL} alt="imagem de destaque" height={'300px'} width={'100%'} />}
       <Paragraph className={styles.descriptionIntern}>{article.description}</Paragraph>
       <Ractions />
-      <Form>
-        <Item label="Deixe seu comentário">
-          <TextArea></TextArea>
-        </Item>
-      </Form>
-      {/* <CommentItem data={commentList} /> */}
+
+      <CommentForm />
+      <CommentList />
     </TemplateOnline>
   )
 }
