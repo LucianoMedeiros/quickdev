@@ -1,0 +1,44 @@
+.itemLeft {
+  flex-direction: row;
+  margin-bottom: 40px;
+  cursor: pointer;
+}
+.itemRight {
+  flex-direction: row-reverse;
+  margin-bottom: 40px;
+  cursor: pointer;
+}
+.boxImage {
+  background-position: center center;
+  background-size: cover;
+  height: 300px;
+  background-color: #ccc;
+}
+.description {
+  font-size: 20px;
+  height: 200px;
+}
+.showMore {
+  width: 100%;
+}
+.dislike:hover {
+  background: tomato;
+  color: white;
+}
+.descriptionIntern {
+  padding: 40px 0;
+  font-size: 20px;
+}
+.authorContainer {
+  padding: 20px 0px 20px 0px;
+  font-size: 20px;
+}
+.authorName {
+  padding: 0 10px;
+  text-transform: uppercase;
+}
+.authorPostUpdated {
+  padding: 0 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+}

@@ -1,9 +1,13 @@
-import { DislikeOutlined, LikeOutlined } from '@ant-design/icons'
 import { Form, Input, Tag, Typography } from 'antd'
 import moment from 'moment'
-import React from 'react'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import Author from '~/components/author-article'
 import CommentItem from '~/components/comment-item'
 import Ractions from '~/components/reactions'
+import { getArticleAction } from '~/store/article/get-article-action'
+import { RootState, useAppDispatch, useAppSelector } from '~/store/store-config'
+import styles from '~/styles/Article.module.css'
 import TemplateOnline from '~/template/online'
 
 const { Title, Paragraph } = Typography
@@ -11,6 +15,18 @@ const { useForm, Item } = Form
 const { TextArea } = Input
 
 const ArticlePage = () => {
+  const dispatch = useAppDispatch()
+  const article = useAppSelector((state: RootState) => state.article.current)
+
+  const route = useRouter()
+  const { id } = route.query
+
+  useEffect(() => {
+    if (id) {
+      dispatch(getArticleAction(id as string))
+    }
+  }, [id])
+
   const commentList = [
     { autor: 'nome do autor 1', id: '1', comment: 'sss', isActive: false, createAt: '2022-11-17T18:51:19.347Z' },
     { autor: 'nome do autor 2', id: '2', comment: 'fff', isActive: true, createAt: '2022-11-17T18:51:19.347Z' },
@@ -20,9 +36,10 @@ const ArticlePage = () => {
   ]
   return (
     <TemplateOnline>
-      <Title>Título</Title>
-      <img src="" alt="imagem de destaque" />
-      <Paragraph>Conteudo</Paragraph>
+      <Title>{article.title}</Title>
+      <Author name={article.user_name} date={article.updateAt} />
+      {article.featureImageURL && <img src={article.featureImageURL} alt="imagem de destaque" height={'300px'} width={'100%'} />}
+      <Paragraph className={styles.descriptionIntern}>{article.description}</Paragraph>
       <Ractions />
       <Form>
         <Item label="Deixe seu comentário">

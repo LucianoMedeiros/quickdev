@@ -1,48 +1,53 @@
 import { createAsyncThunk, nanoid } from '@reduxjs/toolkit'
+import axios, { AxiosResponse } from 'axios'
 import { APIRoutePath } from '~/constants/api-routes'
 import { saveOnFirebase } from '~/firebase/file-save'
 import IPost from '~/interfaces/post-interface'
 import { notificationError, notificationSuccess } from '~/utilities/notification'
 import { PostActions } from './post-reducer'
-import axios, { AxiosResponse } from 'axios'
 
-export const createPostAction = createAsyncThunk('post/create', async (post: IPost, { dispatch }) => {
-  const ret = { isSuccess: false, id: '' }
+export const updatePostAction = createAsyncThunk('post/update', async (post: IPost, { dispatch }) => {
+  let isSuccess = false
   dispatch(PostActions.setIsPending(true))
+
+  const url = APIRoutePath.post.update.replace(':id', post._id)
 
   if (post.featureImageURL !== undefined && post.featureImageURL !== '' && !post.featureImageURL.includes('https://')) {
     post.featureImageURL = await saveOnFirebase(post.featureImageURL, nanoid(10), 'featurePosts')
   }
 
   await axios
-    .post(APIRoutePath.post.create, post)
+    .patch(url, post)
     .then(async (result: AxiosResponse) => {
       notificationSuccess('Sucesso!', 'Post gravado com sucesso.', 'top')
-      ret.isSuccess = true
-      ret.id = result.data
+      isSuccess = true
     })
     .catch(error => {
-      console.error('createPostAction', error.message)
+      console.error(error.message)
       notificationError('Erro', error.message, 'top')
     })
     .finally(async () => {
-      if (ret.isSuccess) {
-        await versioningNewPost(ret.id)
+      if (isSuccess) {
+        await versioningExistPost(post._id)
       }
-      dispatch(PostActions.setIsPending(false))
+      await dispatch(PostActions.setIsPending(false))
     })
-  return ret.isSuccess
+
+  return isSuccess
 })
 
-const versioningNewPost = async (id: string) => {
+const versioningExistPost = async (id: string) => {
   const url = APIRoutePath.post.version.create.replace(':post_id', id)
 
-  axios
-    .post(url, { isNewPost: true })
-    .then(async (result: AxiosResponse) => {
-      console.log('success', result)
-    })
-    .catch(error => {
-      console.error('createPostAction - VersioningNewPost', error)
-    })
+  const urlGET = APIRoutePath.post.get.replace(':id', id)
+  await axios.get(urlGET).then(async (result: AxiosResponse) => {
+    axios
+      .post(url, { newPostVersion: { ...result.data } })
+      .then(async (result: AxiosResponse) => {
+        console.log('success', result)
+      })
+      .catch(error => {
+        console.error('createPostAction - VersioningExistPost', error)
+      })
+  })
 }

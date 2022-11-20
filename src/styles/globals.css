@@ -16,6 +16,15 @@ a {
 
 h1.ant-typography {
   border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+h1.ant-typography small {
+  border: 1px dashed orange;
+  padding: 10px;
+  font-size: 16px;
+  background-color: rgb(255, 255, 163);
 }
 div.ant-typography {
   margin: 0;
@@ -29,6 +38,9 @@ div.ant-typography {
 }
 .ant-spin-nested-loading {
   width: 100%;
+}
+.ant-table-row.active td {
+  font-weight: bold;
 }
 :root {
   --xs: 480px;

@@ -5,9 +5,6 @@ import { Post, PostInput } from '~/model/post-model'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
-    case 'GET':
-      getAllPosts(req, res)
-      break
     case 'POST':
       createPost(req, res)
       break
@@ -17,11 +14,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 export default connectDB(handler)
 
 const createPost = async (req: NextApiRequest, res: NextApiResponse) => {
-  // return res.status(200).json(['createPost', req.method])
   try {
-    const { user_id, title, description, featureImageURL } = req.body
+    const { user_id, user_name, title, description, featureImageURL, version } = req.body
     console.log('req.body', req.body)
-    if (!user_id || !title || !description || featureImageURL == undefined || featureImageURL == null) {
+    if (!user_id || !title || !description) {
       return res.status(422).json({ message: 'Os campos user_id, title, description, featureImageURL são obrigatórios.' })
     }
 
@@ -30,24 +26,17 @@ const createPost = async (req: NextApiRequest, res: NextApiResponse) => {
       title,
       description,
       featureImageURL,
-      status: true,
+      version,
+      user_name,
+      isActive: true,
     }
 
-    const postCreated = await Post.create(postInput)
+    let postCreated = await Post.create(postInput)
+    postCreated.toJSON()
 
-    return res.status(201).json({ data: postCreated })
+    return res.status(201).json(postCreated.id)
   } catch (error: any) {
-    console.error(error)
-    return res.status(422).json(error)
-  }
-}
-const getAllPosts = async (req: NextApiRequest, res: NextApiResponse) => {
-  // return res.status(200).json(['getAllPosts', req.method])
-  try {
-    const posts: IPost[] = await Post.find().sort({ updateAt: 'desc' }).exec()
-    return res.status(200).json(posts)
-  } catch (error: any) {
-    console.error(error)
+    console.error('createPost', error)
     return res.status(422).json(error)
   }
 }

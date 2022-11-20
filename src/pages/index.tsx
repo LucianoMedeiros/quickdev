@@ -1,33 +1,27 @@
-import { Button, Typography } from 'antd'
-import { useRouter } from 'next/router'
-import { RoutePath } from '~/constants/portal-routes'
+import { Spin } from 'antd'
+import { useEffect } from 'react'
+import ArticleItem from '~/components/article-item'
+import { IArticle } from '~/interfaces/article-interface'
+import { getAllArticlesAction } from '~/store/article/get-all-articles-action'
+import { RootState, useAppDispatch, useAppSelector } from '~/store/store-config'
 import TemplateOnline from '~/template/online'
-import styles from '../styles/Home.module.css'
-
-const { Title, Paragraph } = Typography
 
 export default function Home() {
-  const route = useRouter()
+  const dispatch = useAppDispatch()
+  const isPending = useAppSelector((state: RootState) => state.article.isPending)
+  const articleList = useAppSelector((state: RootState) => state.article.list)
 
-  const data = [
-    { id: '1', title: 'titulo 1', excerpts: 'conteudo resumido 1', featuredImageURL: '' },
-    { id: '2', title: 'titulo 2', excerpts: 'conteudo resumido 2', featuredImageURL: '' },
-    { id: '3', title: 'titulo 3', excerpts: 'conteudo resumido 3', featuredImageURL: '' },
-    { id: '4', title: 'titulo 4', excerpts: 'conteudo resumido 4', featuredImageURL: '' },
-  ]
+  useEffect(() => {
+    dispatch(getAllArticlesAction())
+  }, [])
 
   return (
     <TemplateOnline>
-      {data.map(item => (
-        <div key={item.id}>
-          <Title>{item.title}</Title>
-          <img src={item.featuredImageURL} alt={item.title} />
-          <Paragraph>{item.excerpts}</Paragraph>
-          <Button type="link" onClick={() => route.push(RoutePath.article.replace(':id', item.id))}>
-            ver mais
-          </Button>
-        </div>
-      ))}
+      <Spin spinning={isPending}>
+        {articleList.map((item, key) => (
+          <ArticleItem key={item._id} item={item as IArticle} iterator={key} />
+        ))}
+      </Spin>
     </TemplateOnline>
   )
 }

@@ -3,14 +3,14 @@
 - [x] [Autentication] - Login
 - [ ] [Autentication] - Reset de Senha
 - [x] [Autentication] - Criação de usuário
-- [ ] [Profile] - Editar usuário
-- [ ] [Profile] - Perfil de Leitor e Redator
+- [x] [Profile] - Editar usuário
+- [x] [Profile] - Atualizar senha
 
 # Posts
 
-- [ ] [Posts] - Editor de posts [link](https://ckeditor.com/docs/ckeditor5/latest/installation/frameworks/react.html)
-- [ ] [Posts] - Tratamento de imagens
-- [ ] [Posts] - Histórico de alterações
+- [x] [Posts] - Editor de posts [link](https://ckeditor.com/docs/ckeditor5/latest/installation/frameworks/react.html)
+- [x] [Posts] - Tratamento de imagens
+- [x] [Posts] - Histórico de alterações
 - [ ] [Posts] - Contador de Views
 - [ ] [Posts] - Likes e Dislikes com contadores
 

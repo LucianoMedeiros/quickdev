@@ -1,11 +1,20 @@
 export default interface IPost {
-  id: string
-  user_id: string
+  _id: string
   title: string
   description: string
   featureImageURL: any
-  status: boolean
+  version: number
+  isActive: boolean
+  user_id: string
+  user_name: string
 }
+
+export interface IPostVersion {
+  _id: string
+  post_id: string
+  versions: IPost[]
+}
+
 export interface IReactionPost {
   likes: ReactionPostType
   dislikes: ReactionPostType
@@ -33,10 +42,9 @@ export interface IPostViews {
   views: number
 }
 
-export interface IPost_React_Views extends IReactionPost, IPost, IPostViews {}
-
 export interface IPostInitialState {
+  versionList: IPostVersion
   current: IPost
-  list: IPost_React_Views[]
+  list: IPost[]
   isPending: boolean
 }

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { initialState } from './initial-state'
 
 const slice = createSlice({
-  name: 'post',
+  name: 'article',
   initialState,
   reducers: {
     setIsPending: (state, { payload }) => {
@@ -11,15 +11,12 @@ const slice = createSlice({
     setAll: (state, { payload }) => {
       state.list = payload
     },
-    setCurrent: (state, { payload }) => {
+    setArticle: (state, { payload }) => {
       state.current = payload
-    },
-    setVersion: (state, { payload }) => {
-      state.versionList = payload
     },
   },
 })
 
-export const PostActions = slice.actions
+export const ArticleActions = slice.actions
 
-export const postReducer = slice.reducer
+export const articleReducer = slice.reducer

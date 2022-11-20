@@ -2,12 +2,18 @@ import { IPostInitialState } from '~/interfaces/post-interface'
 
 export const initialState: IPostInitialState = {
   current: {
-    id: '',
+    _id: '',
     user_id: '',
     title: '',
     description: '',
     featureImageURL: '',
-    status: false,
+    version: 1,
+    isActive: false,
+  },
+  versionList: {
+    _id: '',
+    post_id: '',
+    versions: [],
   },
   list: [],
   isPending: false,

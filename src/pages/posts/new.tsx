@@ -15,7 +15,7 @@ const { TextArea } = Input
 const { Group } = Button
 
 const PostsPage = () => {
-  const [file, setFile] = useState<string | ArrayBuffer | null>()
+  const [file, setFile] = useState<string | ArrayBuffer | null>('')
   const dispatch = useAppDispatch()
   const user = useAppSelector((state: RootState) => state.user.current)
 
@@ -36,9 +36,11 @@ const PostsPage = () => {
   const handleSubmit = async () => {
     const data = form.getFieldsValue()
     data.user_id = user.id
-    data.featureImageURL = file
+    data.user_name = user.name || 'Anônimo'
+    data.featureImageURL = file || ''
 
     const { payload } = await dispatch(createPostAction(data))
+
     if (payload) {
       form.resetFields()
       route.push(RoutePath.user.posts)

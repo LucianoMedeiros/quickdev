@@ -1,6 +1,7 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 import { useSelector } from 'react-redux'
 import { TypedUseSelectorHook, useDispatch } from 'react-redux'
+import { articleReducer } from './article/article-reducer'
 import { commentReducer } from './comment/comment-reducer'
 import { dashboardReducer } from './dashboard/dashboard-reducer'
 import { postReducer } from './posts/post-reducer'
@@ -12,6 +13,7 @@ const store = configureStore({
     posts: postReducer,
     comments: commentReducer,
     dashboard: dashboardReducer,
+    article: articleReducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware({ serializableCheck: false }),
 })

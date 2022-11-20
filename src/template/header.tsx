@@ -35,7 +35,7 @@ const HeaderTemplate = () => {
       key: '3',
       label: (
         <Button type="link" onClick={() => router.push(RoutePath.user.posts)}>
-          Artigos
+          Meus Artigos
         </Button>
       ),
     },
