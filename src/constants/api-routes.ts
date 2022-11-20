@@ -14,4 +14,10 @@ export const APIRoutePath = {
     get: `${serverURL}/api/article/:id`,
     getAll: `${serverURL}/api/article`,
   },
+  user: {
+    reaction: {
+      create: `${serverURL}/api/user/reaction`,
+      getByPost: `${serverURL}/api/user/reaction/:post_id/:user_id`,
+    },
+  },
 }

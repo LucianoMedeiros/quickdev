@@ -17,6 +17,9 @@ const slice = createSlice({
     setVersion: (state, { payload }) => {
       state.versionList = payload
     },
+    setReactions: (state, { payload }) => {
+      state.currentReactions = payload
+    },
   },
 })
 

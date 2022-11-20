@@ -5,7 +5,7 @@ import { Post, PostInput } from '~/model/post-model'
 export const createPost = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { user_id, user_name, title, description, featureImageURL, version } = req.body
-    console.log('req.body', req.body)
+
     if (!user_id || !title || !description) {
       return res.status(422).json({ message: 'Os campos user_id, title, description, featureImageURL são obrigatórios.' })
     }

@@ -16,17 +16,13 @@ export interface IPostVersion {
 }
 
 export interface IReactionPost {
-  likes: ReactionPostType
-  dislikes: ReactionPostType
-}
-
-type ReactionPostType = {
-  count: number
-  hasClicked: boolean
+  likes: number
+  dislikes: number
+  myReaction: number
 }
 
 export interface IReaction {
-  id: string
+  _id: string
   post_id: string
   user_id: string
   reaction: ReactionsEnum
@@ -44,6 +40,7 @@ export interface IPostViews {
 
 export interface IPostInitialState {
   versionList: IPostVersion
+  currentReactions: IReactionPost
   current: IPost
   list: IPost[]
   isPending: boolean

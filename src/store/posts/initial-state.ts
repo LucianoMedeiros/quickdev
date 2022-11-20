@@ -4,6 +4,7 @@ export const initialState: IPostInitialState = {
   current: {
     _id: '',
     user_id: '',
+    user_name: '',
     title: '',
     description: '',
     featureImageURL: '',
@@ -17,4 +18,9 @@ export const initialState: IPostInitialState = {
   },
   list: [],
   isPending: false,
+  currentReactions: {
+    likes: 0,
+    dislikes: 0,
+    myReaction: 0,
+  },
 }

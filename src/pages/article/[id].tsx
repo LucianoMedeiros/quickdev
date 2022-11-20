@@ -1,5 +1,4 @@
-import { Form, Input, Tag, Typography } from 'antd'
-import moment from 'moment'
+import { Form, Input, Typography } from 'antd'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Author from '~/components/author-article'
@@ -46,7 +45,7 @@ const ArticlePage = () => {
           <TextArea></TextArea>
         </Item>
       </Form>
-      <CommentItem data={commentList} />
+      {/* <CommentItem data={commentList} /> */}
     </TemplateOnline>
   )
 }
