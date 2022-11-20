@@ -1,5 +1,5 @@
 import { Document, Model, model, models, Schema } from 'mongoose'
-import { IReaction } from '~/interfaces/post-interface'
+import { IReaction } from '~/interfaces/reaction-interface'
 
 type ReactionDocument = Document & IReaction
 

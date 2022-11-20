@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { IReaction } from '~/interfaces/post-interface'
+import { IReaction } from '~/interfaces/reaction-interface'
 import { Reaction, ReactionInput } from '~/model/post-reactions-model'
 
 export const addReaction = async (req: NextApiRequest, res: NextApiResponse) => {

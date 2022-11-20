@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios, { AxiosResponse } from 'axios'
 import { APIRoutePath } from '~/constants/api-routes'
-import { IReaction } from '~/interfaces/post-interface'
+import { IReaction } from '~/interfaces/reaction-interface'
 import { notificationError, notificationSuccess } from '~/utilities/notification'
 import { getPostReactionsAction } from './get-post-reaction-action'
 import { PostActions } from './post-reducer'

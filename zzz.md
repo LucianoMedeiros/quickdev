@@ -12,7 +12,7 @@
 - [x] [Posts] - Tratamento de imagens
 - [x] [Posts] - Histórico de alterações
 - [ ] [Posts] - Contador de Views
-- [ ] [Posts] - Likes e Dislikes com contadores
+- [x] [Posts] - Likes e Dislikes com contadores
 
 # Comments
 
