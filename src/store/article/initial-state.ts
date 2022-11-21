@@ -8,6 +8,7 @@ export const initialState: IArticleInitialState = {
     featureImageURL: '',
     isActive: false,
     user_id: '',
+    user_name: '',
     version: 0,
   },
   list: [],
