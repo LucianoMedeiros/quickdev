@@ -47,7 +47,7 @@ const LoginPage = () => {
           <Button type="primary" size="large" className={styles.fullWidth} htmlType="submit">
             Entrar
           </Button>
-          <FormFooter showForgot showSignup />
+          <FormFooter showSignup />
         </Form>
       </Spin>
     </TemplateOffline>

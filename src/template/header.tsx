@@ -42,6 +42,14 @@ const HeaderTemplate = () => {
     {
       key: '4',
       label: (
+        <Button onClick={() => router.push(RoutePath.app.dashboard)} type="link">
+          Relatórios
+        </Button>
+      ),
+    },
+    {
+      key: '5',
+      label: (
         <Button type="link" onClick={logout}>
           Sair
         </Button>
@@ -53,10 +61,6 @@ const HeaderTemplate = () => {
     <Header className={styles.header}>
       <Button icon={<HomeOutlined />} onClick={() => router.push(RoutePath.app.home)} className={styles.headerButtons} size="large" type="link">
         Home Page
-      </Button>
-
-      <Button icon={<TableOutlined />} onClick={() => router.push(RoutePath.app.dashboard)} className={styles.headerButtons} size="large" type="link">
-        Relatórios
       </Button>
 
       <Dropdown menu={{ items }} placement="bottomRight" arrow>

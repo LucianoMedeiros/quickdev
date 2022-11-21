@@ -56,7 +56,7 @@ const SignupPage = () => {
             Cadastrar
           </Button>
 
-          <FormFooter showForgot showLogin />
+          <FormFooter showLogin />
         </Form>
       </Spin>
     </TemplateOffline>

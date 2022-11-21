@@ -19,11 +19,14 @@ const FormFooter = ({ showSignup, showForgot, showLogin }: Props) => {
           Login
         </Button>
       )}
+      {/*
+      To Do 
       {showForgot && (
         <Button type="link" size="large" onClick={() => router.push(RoutePath.auth.forgot)}>
           Esqueci minha senha
         </Button>
       )}
+      */}
       {showSignup && (
         <Button type="link" size="large" onClick={() => router.push(RoutePath.auth.signup)}>
           Quero me cadastrar
