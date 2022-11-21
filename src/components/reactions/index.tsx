@@ -43,7 +43,6 @@ const Ractions = () => {
     if (isChanged) {
       dispatch(createPostReactionAction(currentReaction))
       setIsChanged(false)
-      console.log('almost')
     }
   }, [isChanged])
 

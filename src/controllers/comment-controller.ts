@@ -64,3 +64,24 @@ export const getAllComments = async (req: NextApiRequest, res: NextApiResponse) 
     return res.status(422).json(error)
   }
 }
+
+export const deactivateComment = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const { id } = req.query
+
+    const comment = await Comment.findById(id)
+
+    if (!comment) {
+      return res.status(404).json({ message: `Comentários com o id "${id}" não encontrado.` })
+    }
+
+    await Comment.updateOne({ _id: id }, { isActive: false })
+
+    const commentUpdated = await Comment.findById(id)
+
+    return res.status(200).json({ commentUpdated })
+  } catch (error: any) {
+    console.error('API-deactivateComment', error)
+    return res.status(422).json(error)
+  }
+}

@@ -16,12 +16,12 @@ type Props = {
 
 const TemplateOnline = ({ children }: Props) => {
   const dispatch = useAppDispatch()
-  const router = useRouter()
+  const route = useRouter()
   const isPending = useAppSelector((state: RootState) => state.user.isPending)
 
   useEffect(() => {
     dispatch(UserActions.setIsPending(true))
-    getAuthUserOnReload(dispatch, router)
+    getAuthUserOnReload(dispatch, route)
   }, [])
 
   return (

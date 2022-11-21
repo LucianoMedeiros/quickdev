@@ -1,29 +1,37 @@
 import { Table, Typography } from 'antd'
-import React from 'react'
+import { ColumnsType } from 'antd/lib/table'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { IDashboardPost } from '~/interfaces/dashboard-interface'
+import { getDashboardAction } from '~/store/dashboard/get-dashboard-action'
+import { RootState, useAppDispatch, useAppSelector } from '~/store/store-config'
 import TemplateOnline from '~/template/online'
 
 const { Title } = Typography
 
 const DashboardPage = () => {
-  const columns = [
-    { title: 'Título', dataIndex: 'title', key: 'title' },
-    { title: 'Comentários', dataIndex: 'comments', key: 'comments' },
-    { title: 'Visualizações', dataIndex: 'pageViews', key: 'pageViews' },
-    { title: 'Curtidas', dataIndex: 'likes', key: 'likes' },
-    { title: 'Não Curtidas', dataIndex: 'dislikes', key: 'dislikes' },
+  const dispatch = useAppDispatch()
+  const user = useAppSelector((state: RootState) => state.user.current)
+  const data = useAppSelector((state: RootState) => state.dashboard.current)
+
+  const columns: ColumnsType<IDashboardPost> = [
+    { title: 'Título', dataIndex: 'post_title', key: 'post_title' },
+    { title: 'Comentários', dataIndex: 'comments', key: 'comments', align: 'center' },
+    { title: 'Visualizações', dataIndex: 'views', key: 'views', align: 'center' },
+    { title: 'Curtidas', dataIndex: 'likes', key: 'likes', align: 'center' },
+    { title: 'Não Curtidas', dataIndex: 'dislikes', key: 'dislikes', align: 'center' },
   ]
+
+  useEffect(() => {
+    dispatch(getDashboardAction(user.id))
+  }, [user])
+
   return (
     <TemplateOnline>
       <Title>Relatório</Title>
-      <Table columns={columns} pagination={{ pageSize: 10 }} />
+      <Table columns={columns} pagination={{ pageSize: 10 }} dataSource={data} />
     </TemplateOnline>
   )
 }
 
 export default DashboardPage
-
-// - a. Título;
-// - b. Quantos comentários eles possuem;
-// - c. Quantas visualizações;
-// - d. Quantas curtidas;
-// - e. Quantas não curtidas;

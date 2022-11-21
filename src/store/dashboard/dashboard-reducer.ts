@@ -1,11 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { initialState } from './initial-state'
 
 const slice = createSlice({
   name: 'dashboard',
-  initialState: {},
+  initialState,
   reducers: {
     setIsPending: (state, { payload }) => {
       state.isPending = payload
+    },
+    set: (state, { payload }) => {
+      state.current = payload
     },
   },
 })

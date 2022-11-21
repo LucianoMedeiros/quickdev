@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios, { AxiosResponse } from 'axios'
 import { APIRoutePath } from '~/constants/api-routes'
-import { IComment } from '~/interfaces/comment-interface'
+import { ActionCommentType } from '~/interfaces/comment-interface'
 import { notificationError } from '~/utilities/notification'
 import { PostActions } from '../posts/post-reducer'
 
-export const getAllCommentsAction = createAsyncThunk('comment/getAll', async (comment: IComment, { dispatch }) => {
+export const getAllCommentsAction = createAsyncThunk('comment/getAll', async (comment: ActionCommentType, { dispatch }) => {
   dispatch(PostActions.setIsPending(true))
 
   const url = APIRoutePath.post.comment.getAll.replace(':post_id', comment.post_id)

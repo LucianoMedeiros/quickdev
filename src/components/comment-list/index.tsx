@@ -1,4 +1,3 @@
-import React from 'react'
 import { RootState, useAppSelector } from '~/store/store-config'
 import CommentItem, { CommentType } from '../comment-item'
 

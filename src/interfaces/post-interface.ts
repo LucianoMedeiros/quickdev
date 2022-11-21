@@ -1,7 +1,8 @@
 import { IComment } from './comment-interface'
+import { ITimestamp } from './common-interface'
 import { IReactionPost } from './reaction-interface'
 
-export default interface IPost {
+export default interface IPost extends ITimestamp {
   _id: string
   title: string
   description: string

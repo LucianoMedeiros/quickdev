@@ -1,92 +1,129 @@
-/* eslint-disable @next/next/no-img-element */
-import { CheckCircleOutlined, CloseCircleOutlined, CommentOutlined, EditOutlined, PictureOutlined } from '@ant-design/icons'
-import { Button, Col, Grid, Row, Table, Tooltip, Typography } from 'antd'
-import { ColumnsType, ColumnType } from 'antd/lib/table'
+import { CheckCircleOutlined, CloseCircleOutlined, DeleteOutlined, PictureOutlined, UserDeleteOutlined } from '@ant-design/icons'
+import { Button, Col, Row, Table, Tooltip, Typography } from 'antd'
+import { ColumnsType } from 'antd/lib/table'
 import moment from 'moment'
 import { useRouter } from 'next/router'
-import React from 'react'
+import { useEffect } from 'react'
 import { RoutePath } from '~/constants/portal-routes'
+import { ActionCommentType, IComment } from '~/interfaces/comment-interface'
+import { deactivateCommentAction } from '~/store/comment/deactivate-comment-action'
+import { getAllCommentsAction } from '~/store/comment/get-all-comments-action'
+import { getPostAction } from '~/store/posts/get-post-action'
+import { RootState, useAppDispatch, useAppSelector } from '~/store/store-config'
 import TemplateOnline from '~/template/online'
 
 const { Group } = Button
 const { Title, Paragraph } = Typography
 
-interface IPostComments {
-  id: string
-  comment: string
-  author: string
-  createAt: string
-  isActive: boolean
-}
-
 const CommentListPage = () => {
+  const dispatch = useAppDispatch()
   const route = useRouter()
   const { id } = route.query
+  const comments = useAppSelector((state: RootState) => state.posts.currentComments)
 
-  const data = [
-    { isActive: true, id: '1', comment: 'Fala muito', author: 'Lorem da Silva', createAt: '2022-11-17T18:51:19.347Z' },
-    { isActive: true, id: '2', comment: 'Não gostei... muito fraco', author: 'Lorem da Silva', createAt: '2022-11-17T18:51:19.347Z' },
-    { isActive: false, id: '3', comment: 'Adorei!!! Mudou minha vida.', author: 'Lorem da Silva', createAt: '2022-11-17T18:51:19.347Z' },
-    { isActive: false, id: '4', comment: 'Pode ser melhor', author: 'Lorem da Silva', createAt: '2022-11-17T18:51:19.347Z' },
-  ]
+  const post = useAppSelector((state: RootState) => state.posts.current)
+  const user = useAppSelector((state: RootState) => state.user.current)
 
-  const columns: ColumnsType<IPostComments> = [
-    { title: 'Comentário', dataIndex: 'comment', key: 'comment' },
-    { title: 'Author', dataIndex: 'author', key: 'author' },
-    { align: 'center', title: 'Data', dataIndex: 'createAt', key: 'createAt', render: (value: string, record) => moment(value).format('DD/MM/YYYY') },
+  const removeComment = async (id: string, post_id: string) => {
+    if (confirm('Tem certeze que deseja remover? Esta ação não poderá ser desfeita.')) {
+      const commentParams = { post_id: post_id, user_id: user.id, _id: id } as ActionCommentType
+      await dispatch(deactivateCommentAction(commentParams))
+      await dispatch(getAllCommentsAction(commentParams))
+    }
+  }
+
+  const columns: ColumnsType<IComment> = [
+    { title: 'Comentário', dataIndex: 'description', key: 'description' },
+    { title: 'Autor', dataIndex: 'user_name', key: 'user_name' },
+    {
+      title: 'Status',
+      dataIndex: 'isActive',
+      key: 'isActive',
+      render: (value: string, record: IComment) =>
+        value ? (
+          <Button type="link" icon={<CheckCircleOutlined />} size="large" style={{ color: 'green' }}>
+            ativo
+          </Button>
+        ) : (
+          <Button type="link" icon={<DeleteOutlined />} size="large" style={{ color: 'tomato' }}>
+            removido
+          </Button>
+        ),
+    },
+    {
+      align: 'center',
+      title: 'Data',
+      dataIndex: 'updatedAt',
+      key: 'updatedAt',
+      render: (value: string, record: IComment) => moment(record.updatedAt).format('DD/MM/YYYY'),
+    },
     {
       align: 'center',
       title: 'Ações',
       dataIndex: 'actions',
       key: 'actions',
-      render: (value: string, record) => {
+      render: (value: string, record: IComment) => {
         return (
           <>
             {record.isActive ? (
-              <Tooltip placement="topRight" title="desativar">
-                <Button type="link" icon={<CloseCircleOutlined />} size="large" style={{ color: 'tomato' }} />
+              <Tooltip placement="topRight" title="remover">
+                <Button
+                  onClick={() => removeComment(record._id, record.post_id)}
+                  type="link"
+                  icon={<DeleteOutlined />}
+                  size="large"
+                  style={{ color: 'tomato' }}
+                />
               </Tooltip>
             ) : (
-              <Tooltip placement="topRight" title="ativar">
-                <Button type="link" icon={<CheckCircleOutlined />} size="large" style={{ color: 'green', fontSize: '20px' }} />
-              </Tooltip>
+              <Button type="link" size="large">
+                {' - '}
+              </Button>
             )}
           </>
         )
       },
     },
   ]
+
+  useEffect(() => {
+    if (id) {
+      dispatch(getPostAction(id as string))
+    }
+  }, [id])
+
+  useEffect(() => {
+    if (id && user) {
+      const commentParams = { post_id: id, user_id: user.id } as ActionCommentType
+      dispatch(getAllCommentsAction(commentParams))
+    }
+  }, [id, user])
+
   return (
     <TemplateOnline>
-      <Title>Comentários do Post {id}</Title>
+      <Title>Comentários do Post</Title>
       <Row gutter={[30, 30]}>
-        <Col>
-          <PictureOutlined style={{ fontSize: 200 }} />
+        <Col span={8}>
+          <img src={post.featureImageURL} alt={post.title} width={'100%'} style={{ maxHeight: '250px' }} />
         </Col>
-        <Col>
+        <Col span={16}>
           <Row>
             <Col>
-              <Title level={2}>Titulo do post</Title>
+              <Title level={2}>{post.title}</Title>
             </Col>
           </Row>
           <Row>
             <Col>
-              <Paragraph>Lorem ipsum dolor sit amet</Paragraph>
+              <Paragraph>{post.description.substring(0, 400)}...</Paragraph>
+              <Button type="primary" onClick={() => route.push(RoutePath.user.posts)} style={{ marginTop: '20px' }}>
+                voltar
+              </Button>
             </Col>
           </Row>
         </Col>
       </Row>
 
-      <Table
-        columns={columns}
-        dataSource={data}
-        pagination={{ pageSize: 10 }}
-        footer={() => (
-          <Button type="primary" onClick={() => route.push(RoutePath.user.posts)}>
-            voltar
-          </Button>
-        )}
-      />
+      <Table columns={columns} dataSource={comments} pagination={{ pageSize: 10 }} />
     </TemplateOnline>
   )
 }
