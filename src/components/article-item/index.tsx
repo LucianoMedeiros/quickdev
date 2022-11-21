@@ -29,7 +29,7 @@ const ArticleItem = ({ item, iterator }: Props) => {
         <Paragraph onClick={() => route.push(RoutePath.article.replace(':id', item._id))} className={styles.description}>
           {item.description.substring(0, 300)}
         </Paragraph>
-        Postado em: <time>{moment(item.updateAt).format('DD/MM/YY')}</time>
+        Postado em: <time>{moment(item.updatedAt).format('DD/MM/YY')}</time>
       </Col>
     </Row>
   )
