@@ -1,5 +1,5 @@
 import { RootState, useAppSelector } from '~/store/store-config'
-import CommentItem, { CommentType } from '../comment-item'
+import CommentItem from '../comment-item'
 
 const CommentList = () => {
   const comments = useAppSelector((state: RootState) => state.posts.currentComments)
@@ -7,7 +7,7 @@ const CommentList = () => {
   return (
     <div>
       {comments.map(item => (
-        <CommentItem key={item._id} data={item as CommentType} />
+        <CommentItem key={item._id} data={item} />
       ))}
     </div>
   )
