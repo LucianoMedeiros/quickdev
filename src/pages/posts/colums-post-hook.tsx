@@ -5,15 +5,10 @@ import moment from 'moment'
 import { useRouter } from 'next/router'
 import { RoutePath } from '~/constants/portal-routes'
 import IPost from '~/interfaces/post-interface'
-import { useAppDispatch } from '~/store/store-config'
 import { sortIsoDate } from '~/utilities/sort-iso-date'
 
 const usePostColumns = () => {
-  const dispatch = useAppDispatch()
   const route = useRouter()
-
-  // const handleDeactivate = (id: string) => dispatch(deactivateTeam(id));
-  // const handleActivate = (id: string) => dispatch(activateTeam(id));
 
   const columns: ColumnsType<IPost> = [
     { title: 'Título', dataIndex: 'title', key: 'title' },

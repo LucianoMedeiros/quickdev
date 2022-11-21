@@ -37,12 +37,7 @@ export const createPostAction = createAsyncThunk('post/create', async (post: IPo
 const versioningNewPost = async (id: string) => {
   const url = APIRoutePath.post.version.create.replace(':post_id', id)
 
-  axios
-    .post(url, { isNewPost: true })
-    .then(async (result: AxiosResponse) => {
-      console.log('success', result)
-    })
-    .catch(error => {
-      console.error('createPostAction - VersioningNewPost', error)
-    })
+  axios.post(url, { isNewPost: true }).catch(error => {
+    console.error('createPostAction - VersioningNewPost', error)
+  })
 }

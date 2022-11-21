@@ -41,13 +41,8 @@ const versioningExistPost = async (id: string) => {
 
   const urlGET = APIRoutePath.post.get.replace(':id', id)
   await axios.get(urlGET).then(async (result: AxiosResponse) => {
-    axios
-      .post(url, { newPostVersion: { ...result.data } })
-      .then(async (result: AxiosResponse) => {
-        console.log('success', result)
-      })
-      .catch(error => {
-        console.error('createPostAction - VersioningExistPost', error)
-      })
+    axios.post(url, { newPostVersion: { ...result.data } }).catch(error => {
+      console.error('createPostAction - VersioningExistPost', error)
+    })
   })
 }
