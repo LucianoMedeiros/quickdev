@@ -16,11 +16,3 @@ export function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: Fun
     })
   })
 }
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  // Run the middleware
-  await runMiddleware(req, res, cors)
-
-  // Rest of the API logic
-  res.json({ message: 'Hello Everyone!' })
-}
