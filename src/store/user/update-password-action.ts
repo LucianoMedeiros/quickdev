@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { getAuth, updatePassword, updateProfile, User } from 'firebase/auth'
+import { getAuth, updatePassword, User } from 'firebase/auth'
 import { fbApp } from '~/firebase/config'
 import { notificationError } from '~/utilities/notification'
 import { UserActions } from './user-reducer'

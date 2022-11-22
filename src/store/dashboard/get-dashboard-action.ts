@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import axios, { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import { APIRoutePath } from '~/constants/api-routes'
+import { axiosInstance } from '~/utilities/axios-config'
 import { notificationError } from '~/utilities/notification'
 import { DashboardActions } from './dashboard-reducer'
 
@@ -9,7 +10,7 @@ export const getDashboardAction = createAsyncThunk('dashboard/get', async (user_
 
   const url = APIRoutePath.post.dashboard.replace(':user_id', user_id)
 
-  await axios
+  await axiosInstance
     .get(url)
     .then(async (result: AxiosResponse) => {
       dispatch(DashboardActions.set(result.data))

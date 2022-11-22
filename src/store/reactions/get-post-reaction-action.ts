@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import axios, { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import { APIRoutePath } from '~/constants/api-routes'
 import { IReaction } from '~/interfaces/reaction-interface'
+import { axiosInstance } from '~/utilities/axios-config'
 import { notificationError } from '~/utilities/notification'
 import { PostActions } from '../posts/post-reducer'
 
@@ -10,7 +11,7 @@ export const getPostReactionsAction = createAsyncThunk('post/getReactions', asyn
 
   const url = APIRoutePath.user.reaction.getByPost.replace(':post_id', post_id).replace(':user_id', user_id)
 
-  await axios
+  await axiosInstance
     .get(url)
     .then(async (result: AxiosResponse) => {
       dispatch(PostActions.setReactions(result.data))

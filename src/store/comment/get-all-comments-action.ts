@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import axios, { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import { APIRoutePath } from '~/constants/api-routes'
 import { ActionCommentType } from '~/interfaces/comment-interface'
+import { axiosInstance } from '~/utilities/axios-config'
 import { notificationError } from '~/utilities/notification'
 import { PostActions } from '../posts/post-reducer'
 
@@ -10,7 +11,7 @@ export const getAllCommentsAction = createAsyncThunk('comment/getAll', async (co
 
   const url = APIRoutePath.post.comment.getAll.replace(':post_id', comment.post_id)
 
-  axios
+  axiosInstance
     .get(url)
     .then(async (result: AxiosResponse) => {
       dispatch(PostActions.setComments(result.data))

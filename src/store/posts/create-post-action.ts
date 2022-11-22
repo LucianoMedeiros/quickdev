@@ -1,10 +1,11 @@
 import { createAsyncThunk, nanoid } from '@reduxjs/toolkit'
+import { AxiosResponse } from 'axios'
 import { APIRoutePath } from '~/constants/api-routes'
 import { saveOnFirebase } from '~/firebase/file-save'
 import IPost from '~/interfaces/post-interface'
+import { axiosInstance } from '~/utilities/axios-config'
 import { notificationError, notificationSuccess } from '~/utilities/notification'
 import { PostActions } from './post-reducer'
-import axios, { AxiosResponse } from 'axios'
 
 export const createPostAction = createAsyncThunk('post/create', async (post: IPost, { dispatch }) => {
   const ret = { isSuccess: false, id: '' }
@@ -14,7 +15,7 @@ export const createPostAction = createAsyncThunk('post/create', async (post: IPo
     post.featureImageURL = await saveOnFirebase(post.featureImageURL, nanoid(10), 'featurePosts')
   }
 
-  await axios
+  await axiosInstance
     .post(APIRoutePath.post.create, post)
     .then(async (result: AxiosResponse) => {
       notificationSuccess('Sucesso!', 'Post gravado com sucesso.', 'top')
@@ -37,7 +38,7 @@ export const createPostAction = createAsyncThunk('post/create', async (post: IPo
 const versioningNewPost = async (id: string) => {
   const url = APIRoutePath.post.version.create.replace(':post_id', id)
 
-  axios.post(url, { isNewPost: true }).catch(error => {
+  await axiosInstance.post(url, { isNewPost: true }).catch(error => {
     console.error('createPostAction - VersioningNewPost', error)
   })
 }

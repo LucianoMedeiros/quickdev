@@ -1,15 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import axios, { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import { APIRoutePath } from '~/constants/api-routes'
 import { IReaction } from '~/interfaces/reaction-interface'
+import { axiosInstance } from '~/utilities/axios-config'
 import { notificationError, notificationSuccess } from '~/utilities/notification'
-import { getPostReactionsAction } from './get-post-reaction-action'
 import { PostActions } from '../posts/post-reducer'
+import { getPostReactionsAction } from './get-post-reaction-action'
 
 export const createPostReactionAction = createAsyncThunk('post/createReaction', async (reaction: IReaction, { dispatch }) => {
   dispatch(PostActions.setIsPending(true))
 
-  axios
+  axiosInstance
     .post(APIRoutePath.user.reaction.create, reaction)
     .then(async (result: AxiosResponse) => {
       notificationSuccess('Avaliação recebida!', 'Obrigado.', 'top')

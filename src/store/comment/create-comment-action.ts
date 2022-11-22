@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import axios, { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import { APIRoutePath } from '~/constants/api-routes'
-import { getAllComments } from '~/controllers/comment-controller'
 import { IComment } from '~/interfaces/comment-interface'
+import { axiosInstance } from '~/utilities/axios-config'
 import { notificationError, notificationSuccess } from '~/utilities/notification'
 import { PostActions } from '../posts/post-reducer'
 import { getAllCommentsAction } from './get-all-comments-action'
@@ -11,7 +11,7 @@ export const createCommentAction = createAsyncThunk('comment/create', async (com
   let isSuccess = false
   dispatch(PostActions.setIsPending(true))
 
-  await axios
+  await axiosInstance
     .post(APIRoutePath.post.comment.create, comment)
     .then(async (result: AxiosResponse) => {
       notificationSuccess('Sucesso!', 'Post gravado com sucesso.', 'top')
