@@ -24,7 +24,7 @@ const PostsPage = () => {
 
   const convertToBase64 = (file: RcFile) => {
     const reader = new FileReader()
-    reader.onload = function (e) {
+    reader.onload = function () {
       setFile(this.result)
     }
     reader.readAsDataURL(file)

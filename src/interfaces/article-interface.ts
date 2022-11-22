@@ -1,4 +1,3 @@
-import { ITimestamp } from './common-interface'
 import IPost from './post-interface'
 
 export interface IArticle extends IPost {}

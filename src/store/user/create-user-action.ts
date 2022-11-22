@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
 import { fbApp } from '~/firebase/config'
 import { IAuthUser } from '~/interfaces/user-interface'
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import { UserActions } from './user-reducer'
 import { notificationError } from '~/utilities/notification'
+import { UserActions } from './user-reducer'
 
 export const createUserAction = createAsyncThunk('user/signup', async ({ email, password }: IAuthUser, { dispatch }) => {
   const auth = getAuth(fbApp)

@@ -19,7 +19,7 @@ export const updatePostAction = createAsyncThunk('post/update', async (post: IPo
 
   await axiosInstance
     .patch(url, post)
-    .then(async (result: AxiosResponse) => {
+    .then(async () => {
       notificationSuccess('Sucesso!', 'Post gravado com sucesso.', 'top')
       isSuccess = true
     })

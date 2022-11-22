@@ -102,7 +102,7 @@ Lá é preciso criar um project e vincular ele ao git onde está postado o proje
 
 ```js
 // A URI do banco pode ser obtida na aba Cmd Line Tools
-NEXT_PUBLIC_NEXT_API_BASE_URL = '...' // domínio de produção SEM o /api
+NEXT_PUBLIC_NEXT_API_BASE_URL = '...' // domínio de produção SEM o  /api
 ```
 
 A versão que eu publiquei está em: https://quikdev.vercel.app

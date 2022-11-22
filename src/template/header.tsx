@@ -1,4 +1,4 @@
-import { HomeOutlined, TableOutlined, UserOutlined } from '@ant-design/icons'
+import { HomeOutlined, UserOutlined } from '@ant-design/icons'
 import { Button, Dropdown, Layout, MenuProps } from 'antd'
 import { getAuth } from 'firebase/auth'
 import { useRouter } from 'next/router'

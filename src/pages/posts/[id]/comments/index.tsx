@@ -1,4 +1,4 @@
-import { CheckCircleOutlined, CloseCircleOutlined, DeleteOutlined, PictureOutlined, UserDeleteOutlined } from '@ant-design/icons'
+import { CheckCircleOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Button, Col, Row, Table, Tooltip, Typography } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import moment from 'moment'
@@ -12,7 +12,6 @@ import { getPostAction } from '~/store/posts/get-post-action'
 import { RootState, useAppDispatch, useAppSelector } from '~/store/store-config'
 import TemplateOnline from '~/template/online'
 
-const { Group } = Button
 const { Title, Paragraph } = Typography
 
 const CommentListPage = () => {
@@ -39,7 +38,7 @@ const CommentListPage = () => {
       title: 'Status',
       dataIndex: 'isActive',
       key: 'isActive',
-      render: (value: string, record: IComment) =>
+      render: (value: string) =>
         value ? (
           <Button type="link" icon={<CheckCircleOutlined />} size="large" style={{ color: 'green' }}>
             ativo

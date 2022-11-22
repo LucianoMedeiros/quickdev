@@ -1,6 +1,5 @@
 import { Table, Typography } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
-import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { IDashboardPost } from '~/interfaces/dashboard-interface'
 import { getDashboardAction } from '~/store/dashboard/get-dashboard-action'

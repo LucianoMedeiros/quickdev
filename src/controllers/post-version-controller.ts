@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { Post, PostInput } from '~/model/post-model'
+import { Post } from '~/model/post-model'
 import { PostVersion, PostVersionInput } from '~/model/post-version-model'
 
 export const getPostVersions = async (req: NextApiRequest, res: NextApiResponse) => {

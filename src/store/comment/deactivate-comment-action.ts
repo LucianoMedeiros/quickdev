@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { AxiosResponse } from 'axios'
 import { APIRoutePath } from '~/constants/api-routes'
 import { ActionCommentType } from '~/interfaces/comment-interface'
 import { axiosInstance } from '~/utilities/axios-config'
@@ -14,7 +13,7 @@ export const deactivateCommentAction = createAsyncThunk('comment/deactivate', as
 
   await axiosInstance
     .patch(url)
-    .then(async (result: AxiosResponse) => {
+    .then(async () => {
       notificationSuccess('Sucesso!', 'Comentário removido com sucesso.', 'top')
       dispatch(getAllCommentsAction(comment))
     })

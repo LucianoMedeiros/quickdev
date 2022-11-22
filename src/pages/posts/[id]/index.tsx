@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react'
 import PostVersions from '~/components/post-version'
 import { RoutePath } from '~/constants/portal-routes'
 import IPost from '~/interfaces/post-interface'
-import { createPageViewAction } from '~/store/posts/create-pageview-action'
 import { getPostAction } from '~/store/posts/get-post-action'
 import { getPostVersionAction } from '~/store/posts/get-post-version-action'
 import { initialState } from '~/store/posts/initial-state'
@@ -13,7 +12,7 @@ import { updatePostAction } from '~/store/posts/update-post-action'
 import { RootState, useAppDispatch, useAppSelector } from '~/store/store-config'
 import TemplateOnline from '~/template/online'
 
-const { Title, Link } = Typography
+const { Title } = Typography
 const { Item, useForm } = Form
 const { TextArea } = Input
 const { Group } = Button
@@ -43,7 +42,7 @@ const PostsPage = () => {
 
   const convertToBase64 = (file: RcFile) => {
     const reader = new FileReader()
-    reader.onload = function (e) {
+    reader.onload = function () {
       setFile(this.result)
     }
     reader.readAsDataURL(file)

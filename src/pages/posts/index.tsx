@@ -21,7 +21,7 @@ const PostsPage = () => {
 
   const columns: ColumnsType<IPost> = [
     { title: 'Título', dataIndex: 'title', key: 'title' },
-    { title: 'Conteudo', dataIndex: 'description', key: 'description', render: (value: string, record: IPost) => `${value.substring(0, 50)}...` },
+    { title: 'Conteudo', dataIndex: 'description', key: 'description', render: (value: string) => `${value.substring(0, 50)}...` },
     {
       title: 'Destaque',
       dataIndex: 'featureImageURL',
@@ -36,7 +36,7 @@ const PostsPage = () => {
       key: 'updatedAt',
       defaultSortOrder: 'descend',
       sorter: (a: IPost, b: IPost) => sortIsoDate(a, b),
-      render: (value: string, record: IPost) => moment(value).format('DD/MM/YYYY HH:MM:SS SSS'),
+      render: (value: string) => moment(value).format('DD/MM/YYYY HH:MM:SS SSS'),
     },
     {
       align: 'center',

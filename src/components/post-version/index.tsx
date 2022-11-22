@@ -35,7 +35,7 @@ const PostVersions = ({ onChange }: Props) => {
       <Table
         columns={columns}
         dataSource={versionList}
-        rowClassName={(record, index) => (record.version === post.version ? 'active' : '')}
+        rowClassName={record => (record.version === post.version ? 'active' : '')}
         pagination={{ pageSize: 7 }}
       />
     </div>
