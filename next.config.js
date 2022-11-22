@@ -7,7 +7,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://quikdev-ozvf.vercel.app/:path*',
+        destination: 'https://quikdev.vercel.app/:path*',
       },
     ]
   },
