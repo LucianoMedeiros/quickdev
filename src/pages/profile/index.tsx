@@ -1,20 +1,42 @@
 import { CloseCircleOutlined } from '@ant-design/icons'
 import { Button, Card, Col, Form, Input, Row, Spin, Typography } from 'antd'
-import { RootState, useAppSelector } from '~/store/store-config'
+import { useState } from 'react'
+import IUser, { IAuthUser } from '~/interfaces/user-interface'
+import { RootState, useAppDispatch, useAppSelector } from '~/store/store-config'
+import { updateUserAction } from '~/store/user/update-name-action'
+import { updatePasswordAction } from '~/store/user/update-password-action'
 import TemplateOnline from '~/template/online'
-import useProfileName from './profile-name-hook'
-import useProfilePassword from './profile-password-hook'
+import { notificationSuccess } from '~/utilities/notification'
 
 const { Title, Paragraph } = Typography
-const { Item } = Form
+const { Item, useForm } = Form
 const { Password } = Input
 
 const ProfilePage = () => {
   const currentUser = useAppSelector((state: RootState) => state.user.current)
   const isPending = useAppSelector((state: RootState) => state.user.isPending)
+  const dispatch = useAppDispatch()
 
-  const { isEditName, formName, changeModeEditionName, handleChangeName } = useProfileName()
-  const { isEditPassword, formPassword, changeModeEditionPassword, handleChangePassword } = useProfilePassword()
+  const [formName] = useForm<IUser>()
+  const [isEditName, setIsEditName] = useState<boolean>(false)
+  const changeModeEditionName = () => setIsEditName(!isEditName)
+
+  const handleChangeName = (formData: IUser) => {
+    dispatch(updateUserAction(formData.name as string))
+    formName.resetFields()
+    changeModeEditionName()
+  }
+
+  const [formPassword] = useForm<IAuthUser>()
+  const [isEditPassword, setIsEditPassword] = useState<boolean>(false)
+  const changeModeEditionPassword = () => setIsEditPassword(!isEditPassword)
+
+  const handleChangePassword = (formData: IAuthUser) => {
+    dispatch(updatePasswordAction(formData.password as string))
+    notificationSuccess('Sucesso', 'Senha alterada com sucesso', 'top')
+    formPassword.resetFields()
+    changeModeEditionPassword()
+  }
 
   return (
     <TemplateOnline>
