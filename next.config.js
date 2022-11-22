@@ -3,6 +3,14 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  rewrites: async function () {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://quikdev-ozvf.vercel.app/api/:path*',
+      },
+    ]
+  },
 }
 
-module.exports = nextConfig
+export default nextConfig
