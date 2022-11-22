@@ -81,7 +81,7 @@ const PostsPage = () => {
 
   useEffect(() => {
     dispatch(getAllPostsAction(user.id))
-  }, [])
+  }, [user])
 
   return (
     <TemplateOnline>
