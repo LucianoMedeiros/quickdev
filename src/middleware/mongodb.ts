@@ -1,6 +1,6 @@
-import NextCors from 'nextjs-cors'
 import mongoose from 'mongoose'
 import { NextApiRequest, NextApiResponse } from 'next'
+import { cors, runMiddleware } from './cors'
 
 const connectDB = (handler: any) => async (req: NextApiRequest, res: NextApiResponse) => {
   if (mongoose.connections[0].readyState) {
@@ -11,11 +11,7 @@ const connectDB = (handler: any) => async (req: NextApiRequest, res: NextApiResp
     dbName: 'blogDB',
   })
 
-  await NextCors(req, res, {
-    methods: ['GET', 'PUT', 'PATCH', 'POST'],
-    origin: '*',
-    optionsSuccessStatus: 200,
-  })
+  await runMiddleware(req, res, cors)
   return handler(req, res)
 }
 
